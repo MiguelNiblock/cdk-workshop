@@ -1,7 +1,9 @@
 
-This is an api gateway endpoint that routes all requests to a lambda that echoes your path. The lambda is invoked by another lambda that counts the hits to each url path, and relays the response to the gateway. The hitCounter lambda is made with a custom cdk construct.
+This is an api gateway endpoint that routes all requests to a lambda that echoes the path after the base url. The lambda is invoked by another lambda that counts the hits to each url path, and relays its response as the gateway response. This hitCounter lambda is made with a custom cdk construct.
 
-CdkWorkshopStack.endpointEndpoint5E1E9134 = https://hww03smvy3.execute-api.us-east-1.amazonaws.com/prod/crossing/paths
+Visits to paths of this endpoint: https://hww03smvy3.execute-api.us-east-1.amazonaws.com/prod/crossing/paths will be counted with path as key. 
+
+Data can be seen in this database viewer: https://d8eu8nrv1l.execute-api.us-east-1.amazonaws.com/prod/
 
 
 ## Tutorial  

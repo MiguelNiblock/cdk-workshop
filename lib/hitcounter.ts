@@ -9,11 +9,12 @@ export interface HitCounteProps {
 export class HitCounter extends cdk.Construct {
 
   public readonly handler: lambda.Function;
+  public readonly table: dynamodb.Table;
   
   constructor (scope: cdk.Construct, id: string, props: HitCounteProps){
     super(scope, id)
 
-    const table = new dynamodb.Table(this, 'Hits', {
+    this.table = new dynamodb.Table(this, 'Hits', {
       partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING }
     });
     
@@ -23,11 +24,11 @@ export class HitCounter extends cdk.Construct {
       code: lambda.Code.fromAsset('lambda'),
       environment: {
         DOWNSTREAM_FUNCTION_NAME: props.downstream.functionName,
-        HITS_TABLE_NAME: table.tableName
+        HITS_TABLE_NAME: this.table.tableName
       }
     })
 
-    table.grantReadWriteData(this.handler)
+    this.table.grantReadWriteData(this.handler)
 
     props.downstream.grantInvoke(this.handler);
 
